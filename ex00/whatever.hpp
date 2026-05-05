@@ -2,7 +2,7 @@
 #define WHATEVER_HPP
 
 template<typename T>
-const T& max(T& a, T& b)
+const T& max(const T& a,const T& b)
 {
 	if(a > b)
 		return a;
@@ -10,7 +10,7 @@ const T& max(T& a, T& b)
 }
 
 template<typename T>
-const T& min(T& a, T& b)
+const T& min(const T& a, const T& b)
 {
 	if(a < b)
 		return a;
