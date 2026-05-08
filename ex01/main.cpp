@@ -1,27 +1,36 @@
 #include "iter.hpp"
 #include <iostream>
+#include <ostream>
 #include <string>
 
 void maj(std::string &str)
 {
-	for(int i = 0; i < str.length(); ++i)
+	for(size_t i = 0; i < str.length(); ++i)
 	{
-		if(str[i] > 'a' && str[i] < 'z')
+		if(str[i] >= 'a' && str[i] <= 'z')
 			str[i] -= 32;
 	}
+}
+
+template<typename T>
+void print(const T& x)
+{
+	std::cout << x << std::endl;
 }
 
 
 int main(void)
 {
-// Test avec un tableau de strings (pour prouver que c'est générique)
-    std::string tabStrings[] = {"Bonjour", "le", "monde"};
+    std::string tabStrings[] = {"bonjour", "le", "monde"};
     size_t tailleStrings = 3;
 
-    std::cout << "--- Test avec des strings ---" << std::endl;
-    // Ici, on ne peut pas utiliser 'incrementer' car ça n'a pas de sens sur des strings,
-    // mais on peut utiliser notre template d'affichage instancié pour des strings !
+    std::cout << "--- Test avec modification (non-const) ---" << std::endl;
     ::iter(tabStrings, tailleStrings, maj);
-	std::cout << tabStrings[0] << " " << tabStrings[1] << " " << tabStrings[2];
-    std::cout << std::endl;
+    ::iter(tabStrings, tailleStrings, print<std::string>);
+
+    std::cout << "\n--- Test avec tableau constant (const) ---" << std::endl;
+    const int tabInt[] = {1, 2, 3, 4, 5};
+    ::iter(tabInt, 5, print<int>);
+
+    return 0;
 }

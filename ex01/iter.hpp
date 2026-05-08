@@ -5,7 +5,7 @@
 #include <iostream>
 
 template<typename T, typename Func>
-void iter(T *array, size_t length, Func fonction)
+void iter(T *array,const size_t length, Func fonction)
 {
 	if(!array)
 		return;
